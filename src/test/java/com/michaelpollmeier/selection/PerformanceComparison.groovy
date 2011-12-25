@@ -26,7 +26,8 @@ def timeit = {String message, Closure cl->
 unorderedList = (1..numberCount).collect{random.nextInt()}
 arrayList =  com.google.common.collect.Lists.newArrayList((int[])unorderedList)
 timeit("Guava Ordering") {
-    topElements = com.google.common.collect.Ordering.natural().greatestOf(arrayList, k)
+    topElements = com.google.common.collect.Ordering.natural()
+        .greatestOf(arrayList, k)
     print "Top $k elements: $topElements \t"
 }
 
@@ -52,7 +53,7 @@ unorderedList = (1..numberCount).collect{random.nextInt()}
 timeit("PriorityQueue") {
     heap = new PriorityQueue(unorderedList.size())
     heap.addAll(unorderedList)
-    topElements = (1..k).collect{heap.peek()}
+    topElements = (1..k).collect{heap.poll()}
     print "Top $k elements: $topElements \t"
 }
 
@@ -63,7 +64,7 @@ timeit("PriorityQueue with groovy closure comparator") {
             }] as Comparator
     heap = new PriorityQueue(unorderedList.size(), comparator)
     heap.addAll(unorderedList)
-    topElements = (1..k).collect{heap.peek()}
+    topElements = (1..k).collect{heap.poll()}
     print "Top $k elements: $topElements \t"
 }
 
@@ -72,7 +73,7 @@ timeit("PriorityQueue with MyComparator") {
     comparator = new com.michaelpollmeier.selection.MyComparator()
     heap = new PriorityQueue(unorderedList.size(), comparator)
     heap.addAll(unorderedList)
-    topElements = (1..k).collect{heap.peek()}
+    topElements = (1..k).collect{heap.poll()}
     print "Top $k elements: $topElements \t"
 }
 
@@ -81,7 +82,7 @@ timeit("PriorityQueue with MyComparator2") {
     comparator = new com.michaelpollmeier.selection.MyComparator2()
     heap = new PriorityQueue(unorderedList.size(), comparator)
     heap.addAll(unorderedList)
-    topElements = (1..k).collect{heap.peek()}
+    topElements = (1..k).collect{heap.poll()}
     print "Top $k elements: $topElements \t"
 }
 
@@ -95,7 +96,7 @@ timeit("PriorityQueue with MyComparator3") {
     comparator = new MyComparator3()
     heap = new PriorityQueue(unorderedList.size(), comparator)
     heap.addAll(unorderedList)
-    topElements = (1..k).collect{heap.peek()}
+    topElements = (1..k).collect{heap.poll()}
     print "Top $k elements: $topElements \t"
 }
 
